@@ -25,11 +25,11 @@ peserta menjalankan bash script untuk berinteraksi dengan robot BB8. Bash script
 Web Shell adalah Shell Linux biasa yang dijalankan melalui browser web (karena kursus ini berbasis web).
 
 Jadi, apa itu Linux Shell?
-![alt text](image-1.png)
+![alt text](assets/image-1.png)
 
 Shell adalah alat yang memungkinkan Anda berkomunikasi dengan sistem Linux untuk memberi instruksi (dengan mengirim perintah). Di layar kursus, Anda akan menemukan Web Shells (lihat gambar di atas).
 
-![alt text](image.png)
+![alt text](assets/image.png)
 
 Ini dikenal sebagai _prompt_ di Shell, yang menampilkan informasi dasar seperti nama pengguna saat ini (misalnya, _user_) atau jalur direktori tempat Anda berada (akan dipelajari lebih lanjut di kursus). Anda juga akan melihat adanya blok putih yang berkedip, menandakan bahwa Shell aktif dan siap menerima perintah Anda!
 
