@@ -8,7 +8,7 @@ https://app.theconstruct.ai/courses/
 
 ### UNIT 1 INTRODUCTION
 
-![alt text](image-2.png)
+![alt text](assets/image-2.png)
 
 #### Unit 1.1 Introduction to the Course
 
