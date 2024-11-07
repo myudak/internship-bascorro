@@ -84,3 +84,109 @@ while tebakan != target_number:
     else:
         print("Betul")
 ```
+
+# 2. Soal Pemrograman: Generator Password Acak
+
+## Deskripsi Soal
+
+Buatlah sebuah program yang menghasilkan password acak dengan panjang tertentu sesuai permintaan pengguna. Password yang dihasilkan harus terdiri dari kombinasi huruf besar dan huruf kecil. Pengguna akan diminta untuk menentukan panjang password yang diinginkan sebelum password dihasilkan.
+
+### Catatan
+
+- Pastikan bahwa password yang dihasilkan selalu memiliki kombinasi dari huruf besar dan huruf kecil.
+
+## Penjelasan Input
+
+- Input pertama adalah angka integer yang mewakili panjang password yang diinginkan (minimal 6 karakter, maksimal 20 karakter).
+
+## Penjelasan Output
+
+- Program akan menampilkan sebuah password acak dengan panjang sesuai input pengguna, yang mengandung kombinasi huruf besar dan huruf kecil.
+
+### Contoh
+
+#### Input
+
+```
+12
+```
+
+#### Output
+
+```
+xAnHydIKkLoP
+```
+
+## Jawaban Python
+
+```python
+def password_generators(L):
+    if L < 8 or L > 20:
+        raise Exception("error")
+    LIST_PASSWORD = (
+        "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz!@#$%^&*()1234567890"
+    )
+
+    HURUF_BESAR = random.choice(LIST_PASSWORD[:27])
+    HURUF_KECIL = random.choice(LIST_PASSWORD[27:54])
+    KARAKTER_SPESIAL = random.choice(LIST_PASSWORD[54:62])
+    ANGKA = random.choice(LIST_PASSWORD[62:72])
+    SISANYA = "".join(random.choice(LIST_PASSWORD) for _ in range(L - 4))
+
+    password = list(HURUF_BESAR + HURUF_KECIL + KARAKTER_SPESIAL + ANGKA + SISANYA)
+    random.shuffle(password)
+
+    return "".join(password)
+```
+
+# 3. Soal Pemrograman: Sistem Pemesanan Kursi Bioskop
+
+### Deskripsi Soal
+
+Buatlah sebuah program yang menampilkan tata letak kursi bioskop dalam bentuk array 2 dimensi berukuran 4 baris x 7 kolom. Setiap elemen array merepresentasikan kursi yang belum dipesan dengan format "A1", "A2", dst. Pengguna dapat memesan kursi dengan memilih kode kursi, dan setelah dipesan, kursi tersebut akan ditandai sebagai "Booked". Program akan terus meminta input hingga pengguna selesai memesan kursi.
+
+**Catatan:**
+
+- Baris pertama diwakili oleh huruf **A**, baris kedua oleh **B**, baris ketiga oleh **C**, dan baris keempat oleh **D**.
+- Program harus memvalidasi apakah kursi sudah dipesan sebelumnya. Jika sudah, berikan pesan bahwa kursi tersebut tidak tersedia.
+- Pemesanan berakhir ketika pengguna memasukkan "selesai" sebagai input.
+
+### Penjelasan Input
+
+- Program menerima input berupa kode kursi seperti "A1", "B4", dsb., yang menunjukkan kursi yang dipesan.
+- Pengguna bisa mengetik **"selesai"** untuk mengakhiri pemesanan.
+
+### Penjelasan Output
+
+- Setelah setiap pemesanan, program akan menampilkan array dengan tanda **"Booked"** di posisi kursi yang sudah dipesan.
+- Jika kursi yang dimasukkan tidak valid atau sudah dipesan, program akan memberikan pesan kesalahan.
+
+---
+
+### Contoh Input
+
+```
+A1
+B4
+selesai
+```
+
+### Contoh Output
+
+Sebelum pemesanan:
+
+```
+A1 A2 A3 A4 A5 A6 A7
+B1 B2 B3 B4 B5 B6 B7
+C1 C2 C3 C4 C5 C6 C7
+D1 D2 D3 D4 D5 D6 D7
+```
+
+Setelah A1 dan B4 dipesan:
+
+```
+Booked A2 A3 A4 A5 A6 A7
+B1 B2 B3 Booked B5 B6 B7
+C1 C2 C3 C4 C5 C6 C7
+D1 D2 D3 D4 D5 D6 D7
+```
