@@ -143,3 +143,73 @@ for num in range(7):
 **Jawaban**: 7
 
 **Penjelasan**: Fungsi `range(7)` menghasilkan angka dari 0 hingga 6, yang berarti loop ini akan dijalankan sebanyak 7 kali (untuk setiap angka dari 0 sampai 6).
+
+Here is the Markdown version of these study notes, with answers and explanations in Indonesian.
+
+---
+
+
+# SOAL UNIT 4
+
+### 1. Berapa banyak parameter yang dapat diterima oleh sebuah metode?
+
+- **Minimal satu**
+- Satu atau lebih
+- Nol atau lebih
+- Maksimal lima
+
+**Jawaban**: Nol atau lebih
+
+**Penjelasan**: Sebuah metode di Python dapat menerima nol atau lebih parameter. Parameter yang diberikan pada definisi metode dapat bersifat opsional (dengan nilai default) atau wajib.
+
+---
+
+### 2. Apa yang dilakukan pernyataan `global car` ketika digunakan di dalam sebuah metode?
+
+- Ini membuat variabel `car` yang dapat digunakan di setiap skrip Python.
+- Tidak ada yang spesial, hanya cara lain untuk mendeklarasikan sebuah variabel.
+- **Ini membuat variabel global `car` tersedia untuk dimodifikasi di dalam metode.**
+- Ini membuat variabel `car` dengan tipe khusus `global`.
+
+**Jawaban**: Ini membuat variabel global `car` tersedia untuk dimodifikasi di dalam metode.
+
+**Penjelasan**: Dengan menggunakan kata kunci `global`, variabel `car` yang didefinisikan di luar fungsi/metode dapat diubah di dalam fungsi tersebut. Tanpa `global`, perubahan hanya akan berlaku di dalam ruang lingkup lokal fungsi.
+
+---
+
+### 3. Sebuah metode didefinisikan sebagai `get_value(a, b, c=3)`. Mana dari panggilan fungsi berikut yang salah?
+
+- `get_value(5, 4)`
+- `get_value(4, 5, 3)`
+- **`get_value(3)`**
+- Tidak ada yang salah
+
+**Jawaban**: `get_value(3)`
+
+**Penjelasan**: Fungsi `get_value` memerlukan dua parameter wajib (`a` dan `b`), dan `c` memiliki nilai default 3. Panggilan `get_value(3)` hanya menyediakan satu parameter, yang tidak cukup untuk memenuhi dua parameter wajib (`a` dan `b`).
+
+---
+
+### 4. Mana yang benar tentang variabel yang didefinisikan dalam metode?
+
+- **Mereka tidak dapat digunakan di luar metode.**
+- Mereka tersedia untuk sesaat setelah metode dipanggil.
+- Mereka hanya tersedia dalam skrip yang memanggil metode tersebut.
+- Mereka tersedia di mana saja, bahkan di skrip lain.
+
+**Jawaban**: Mereka tidak dapat digunakan di luar metode.
+
+**Penjelasan**: Variabel yang didefinisikan di dalam metode adalah variabel lokal dan hanya dapat diakses dalam lingkup metode tersebut. Setelah metode selesai dieksekusi, variabel tersebut tidak lagi ada.
+
+---
+
+### 5. Bagaimana cara memanggil metode `go_home()`?
+
+- `!go_home()`
+- call `go_home()`
+- **`go_home()`**
+- `go_home()!`
+
+**Jawaban**: `go_home()`
+
+**Penjelasan**: Di Python, metode dipanggil dengan menggunakan nama metode diikuti dengan tanda kurung, misalnya `go_home()`. Tidak ada tanda seru (`!`) atau kata kunci `call` yang diperlukan.
