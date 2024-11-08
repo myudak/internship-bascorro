@@ -1,6 +1,6 @@
-# PYTHON #
+# PYTHON
 
-# SOAL UNIT 2
+## SOAL UNIT 2
 
 ### 1. Berikut adalah tipe data dalam Python, KECUALI:
 
@@ -66,9 +66,7 @@
 **Penjelasan**: Fungsi `print()` di Python digunakan untuk menampilkan output ke layar, bukan untuk mencetak ke printer atau membersihkan variabel.
 
 
-# SOAL UNIT 3
-
-## Soal Pilihan Ganda
+## SOAL UNIT 3
 
 ### 1. Dalam pemrograman, keputusan perlu diambil.
 
@@ -143,7 +141,7 @@ Here is the Markdown version of these study notes, with answers and explanations
 ---
 
 
-# SOAL UNIT 4
+## SOAL UNIT 4
 
 ### 1. Berapa banyak parameter yang dapat diterima oleh sebuah metode?
 
