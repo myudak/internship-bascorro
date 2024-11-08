@@ -1,12 +1,6 @@
+# PYTHON #
+
 # SOAL UNIT 2
-
-## Skor Kelulusan
-
-Skor kelulusan adalah **100%**.
-
----
-
-## Soal Pilihan Ganda
 
 ### 1. Berikut adalah tipe data dalam Python, KECUALI:
 
