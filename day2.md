@@ -205,3 +205,70 @@ Here is the Markdown version of these study notes, with answers and explanations
 **Jawaban**: `go_home()`
 
 **Penjelasan**: Di Python, metode dipanggil dengan menggunakan nama metode diikuti dengan tanda kurung, misalnya `go_home()`. Tidak ada tanda seru (`!`) atau kata kunci `call` yang diperlukan.
+
+Here is the Markdown version of these study notes, with answers and explanations in Indonesian.
+
+---
+
+## SOAL UNIT 5
+
+### 1. Anda ingin mendefinisikan sebuah kelas Python bernama `Manager`, apa dua kata pertama yang harus Anda tulis?
+
+- `def Manager`
+- `define Manager`
+- `Manager class`
+- **`class Manager`**
+
+**Jawaban**: `class Manager`
+
+**Penjelasan**: Untuk mendefinisikan kelas di Python, gunakan kata kunci `class` diikuti oleh nama kelas, seperti `class Manager:`.
+
+---
+
+### 2. Dalam Pemrograman Berorientasi Objek (OOP), objek terdiri dari apa dan apa?
+
+- **Atribut dan metode**
+- Atribut dan kelas
+- Kelas dan metode
+- Metode dan fungsi
+
+**Jawaban**: Atribut dan metode
+
+**Penjelasan**: Dalam OOP, objek terdiri dari atribut (data) dan metode (fungsi) yang digunakan untuk bekerja dengan data tersebut. Kelas mendefinisikan struktur umum dari objek-objek tersebut.
+
+---
+
+### 3. Sebuah instance dari kelas dibuat menggunakan ___________________ dari kelas tersebut.
+
+- instantiator
+- properties
+- **constructor**
+- initiator
+
+**Jawaban**: constructor
+
+**Penjelasan**: Di Python, `constructor` adalah metode khusus `__init__()` dalam kelas yang secara otomatis dipanggil ketika sebuah instance baru dari kelas dibuat.
+
+---
+
+### 4. Metode dalam kelas dapat mengubah variabel apa pun dalam kelas.
+
+- **True**
+- False
+
+**Jawaban**: True
+
+**Penjelasan**: Metode dalam kelas dapat mengubah nilai dari variabel (atribut) yang didefinisikan di dalam kelas, selama variabel tersebut memiliki cakupan akses yang memungkinkan modifikasi.
+
+---
+
+### 5. Jika `john` adalah instance dari kelas `Manager`, dan `pay_salaries()` adalah metode instance dari kelas `Manager`, bagaimana Anda bisa memanggil metode `pay_salaries()`?
+
+- `Manager.john.pay_salaries()`
+- **`john.pay_salaries()`**
+- `john.Manager.pay_salaries()`
+- `pay_salaries()`
+
+**Jawaban**: `john.pay_salaries()`
+
+**Penjelasan**: Untuk memanggil metode instance pada objek, gunakan sintaks `instance.method()`. Karena `john` adalah instance dari kelas `Manager`, Anda cukup menulis `john.pay_salaries()` untuk memanggil metode `pay_salaries()`.
