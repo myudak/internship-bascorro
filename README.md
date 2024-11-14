@@ -24,3 +24,5 @@ YOLO, dan Roboflow. Sementara itu, sub-divisi Algoritma fokus pada
 pengembangan algoritma lokalisasi dan navigasi robot, dengan menggunakan
 sistem Nav2 dan ROS. Keduanya membantu robot dalam mengidentifikasi objek
 dan menentukan tindakan di lapangan.
+
+![alt text](image-3.png)

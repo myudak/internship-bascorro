@@ -16,6 +16,6 @@ int main(int argc, char **argv) {
   return 0;
 }
 
-void move_and_inform() {
+void move_and_inform(RO) {
 
 }
