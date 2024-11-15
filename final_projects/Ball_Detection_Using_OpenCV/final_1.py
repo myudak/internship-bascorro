@@ -7,17 +7,22 @@ import numpy as np
 
 cap = cv2.VideoCapture(2)
 
+lower_b = np.array([0, 75, 196])
+upper_b = np.array([41, 255, 255])
+# lower_b = np.array([0, 0, 147])
+# upper_b = np.array([179, 255, 255])
+
+
 while 1:
     ret, frame = cap.read()
     if not ret:
+        print("gk kedetek")
         break
 
     hsv = cv2.cvtColor(
         cv2.GaussianBlur(frame, (11, 11), 0),
         cv2.COLOR_BGR2HSV,
     )
-    lower_b = np.array([0, 75, 196])
-    upper_b = np.array([41, 255, 255])
     mask = cv2.inRange(hsv, lower_b, upper_b)
 
     circles = cv2.HoughCircles(
