@@ -1,21 +1,21 @@
-import cv2
+import cv2 as cv
 import numpy as np
 
-video = cv2.VideoCapture(0)
-prevCirc = 0
-dist = lambda x1, y1, x2, y2: (x1 - y1) ** 2 + (x2 - y2) ** 2
+videoCapture = cv.VideoCapture(3)
+prevCircle = None
+dist = lambda x1, y1, x2, y2: (x1 - x2) ** 2 + (y1 - y2) ** 2
 
-while 1:
-    ret, frame = video.read()
-    if not ret or frame is None:
+while True:
+    ret, frame = videoCapture.read()
+    if not ret:
         break
 
-    grayFrame = cv2.cvtColor(frame, cv2.COLOR_BGR2GRAY)
-    blurFrame = cv2.GaussianBlur(grayFrame, (17, 17), 0)
+    grayFrame = cv.cvtColor(frame, cv.COLOR_BGR2GRAY)
+    blurFrame = cv.GaussianBlur(grayFrame, (17, 17), 0)
 
-    circles = cv2.HoughCircles(
+    circles = cv.HoughCircles(
         blurFrame,
-        cv2.HOUGH_GRADIENT,
+        cv.HOUGH_GRADIENT,
         1.2,
         100,
         param1=100,
@@ -30,26 +30,19 @@ while 1:
         for i in circles[0, :]:
             if chosen is None:
                 chosen = i
-            if prevCirc is not None:
-                if dist(i[0], i[1], prevCirc[0], prevCirc[1]) < dist(
-                    chosen[0], chosen[1], prevCirc[0], prevCirc[1]
+            if prevCircle is not None:
+                if dist(chosen[0], chosen[1], prevCircle[0], prevCircle[1]) <= dist(
+                    i[0], i[1], prevCircle[0], prevCircle[1]
                 ):
                     chosen = i
-            prevCirc = i
-        cv2.circle(frame, (chosen[0], chosen[1]), chosen[2], (0, 0, 255), 4)
-        cv2.putText(
-            frame,
-            "Circle",
-            (chosen[0], chosen[1]),
-            cv2.FONT_HERSHEY_SIMPLEX,
-            1,
-            (0, 0, 255),
-            2,
-        )
+        cv.circle(frame, (chosen[0], chosen[1]), 1, (0, 100, 100), 3)
+        cv.circle(frame, (chosen[0], chosen[1]), chosen[2], (255, 0, 255), 3)
+        prevCircle = chosen
 
-    cv2.imshow("frame", frame)
-    key = cv2.waitKey(1)
-    if key == ord("q"):
+    cv.imshow("circles", frame)
+
+    if cv.waitKey(1) & 0xFF == ord("q"):
         break
 
-video.release()
+videoCapture.release()
+cv.destroyAllWindows()

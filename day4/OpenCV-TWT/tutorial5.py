@@ -5,7 +5,7 @@ OpenCV Python Tutorial #5 - Colors and Color Detection
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture(1, cv2.CAP_DSHOW)  # Replace 1 with the OBS Virtual Camera index
+cap = cv2.VideoCapture(3)  # Replace 1 with the OBS Virtual Camera index
 
 
 while 1:
