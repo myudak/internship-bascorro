@@ -5,10 +5,10 @@ COBA
 import cv2
 import numpy as np
 
-cap = cv2.VideoCapture(2)
+cap = cv2.VideoCapture(3)
 
-lower_b = np.array([0, 75, 196])
-upper_b = np.array([41, 255, 255])
+lower_b = np.array([0, 165, 116])
+upper_b = np.array([6, 255, 255])
 # lower_b = np.array([0, 0, 147])
 # upper_b = np.array([179, 255, 255])
 

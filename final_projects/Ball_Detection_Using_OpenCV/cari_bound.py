@@ -8,7 +8,7 @@ def nothing(x):
 
 
 # Load image
-image = cv2.imread("bola4.png")
+image = cv2.imread("bola5.png")
 
 # RESIzE IMAGE
 image = imutils.resize(image, width=600, height=600)

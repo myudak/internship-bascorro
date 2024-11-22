@@ -35,3 +35,7 @@ YOLO stands for **"You Only Look Once,"** and it's a type of computer vision mod
 4. **Fast and Efficient**: YOLO is designed to be super fast. It can work in real-time, which means it’s fast enough to be used in things like self-driving cars, security cameras, or live-streaming apps.
 
 So, in short, YOLO is a fast way for computers to see and identify objects in images or videos at lightning speed—just by looking once!
+
+paper :
+https://community.ultralytics.com/t/the-original-yolo-publications/58
+https://arxiv.org/pdf/1506.02640
