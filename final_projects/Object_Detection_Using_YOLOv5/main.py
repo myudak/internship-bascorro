@@ -1,14 +1,15 @@
 from inference.models.utils import get_roboflow_model
 import cv2
-import os
-from dotenv import load_dotenv
 
-load_dotenv()
+# import os
+# from dotenv import load_dotenv
+
+# load_dotenv()
 
 
 MODEL_NAME = "bola-merah-zsrnn"
 MODEL_VERSION = "1"
-API_KEY = os.getenv("API_KEY")
+API_KEY = "50T2tfOW8OG8ef1iw0nV"
 
 
 print("\n\n========== myudakk ==========")
