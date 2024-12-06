@@ -1,17 +1,15 @@
-cmake_minimum_required(VERSION 3.0.2)
+cmake_minimum_required(VERSION 3.5)
 project(turtlesim_project_py)
 
-find_package(catkin REQUIRED COMPONENTS
-  my_robot_msgs
-  rospy
-  turtlesim
-  geometry_msgs
-)
+find_package(ament_cmake REQUIRED)
+find_package(rclpy REQUIRED)
+find_package(turtlesim REQUIRED)
+find_package(geometry_msgs REQUIRED)
 
-catkin_package(
-   CATKIN_DEPENDS my_robot_msgs rospy turtlesim geometry_msgs
-)
+ament_export_dependencies(rclpy turtlesim geometry_msgs)
 
 include_directories(
-  ${catkin_INCLUDE_DIRS}
+  ${ament_INCLUDE_DIRS}
 )
+
+ament_package()

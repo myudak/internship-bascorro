@@ -1,44 +1,43 @@
-#include <ros/ros.h>
-#include <my_robot_msgs/Coordinates2D.h>
-#include <geometry_msgs/Twist.h>
-#include <turtlesim/Pose.h>
+#include <rclcpp/rclcpp.hpp>
+#include <my_robot_msgs/msg/coordinates2_d.hpp>
+#include <geometry_msgs/msg/twist.hpp>
+#include <turtlesim/msg/pose.hpp>
 
-class TurtleController
+class TurtleController : public rclcpp::Node
 {
-
 public:
-    TurtleController(ros::NodeHandle *nh) : turtlesim_up_(false), target_up_(false)
+    TurtleController() : Node("turtle_controller"), turtlesim_up_(false), target_up_(false)
     {
-        cmd_vel_publisher_ = nh->advertise<geometry_msgs::Twist>("/turtle1/cmd_vel", 10);
-        pose_subscriber_ = nh->subscribe("/turtle1/pose", 10, &TurtleController::callbackTurtlePose, this);
-        target_subscriber_ = nh->subscribe("target_coordinates", 10, &TurtleController::callbackTarget, this);
-        control_loop_timer_ = nh->createTimer(ros::Duration(0.01), std::bind(&TurtleController::controlLoop, this));
-        ROS_INFO("Turtle controller has been started.");
+        cmd_vel_publisher_ = this->create_publisher<geometry_msgs::msg::Twist>("/turtle1/cmd_vel", 10);
+        pose_subscriber_ = this->create_subscription<turtlesim::msg::Pose>("/turtle1/pose", 10, std::bind(&TurtleController::callbackTurtlePose, this, std::placeholders::_1));
+        target_subscriber_ = this->create_subscription<my_robot_msgs::msg::Coordinates2D>("target_coordinates", 10, std::bind(&TurtleController::callbackTarget, this, std::placeholders::_1));
+        control_loop_timer_ = this->create_wall_timer(std::chrono::milliseconds(10), std::bind(&TurtleController::controlLoop, this));
+        RCLCPP_INFO(this->get_logger(), "Turtle controller has been started.");
     }
 
 private:
-    turtlesim::Pose pose_;
-    my_robot_msgs::Coordinates2D target_;
+    turtlesim::msg::Pose pose_;
+    my_robot_msgs::msg::Coordinates2D target_;
     bool turtlesim_up_;
     bool target_up_;
 
-    ros::Publisher cmd_vel_publisher_;
-    ros::Subscriber pose_subscriber_;
-    ros::Subscriber target_subscriber_;
-    ros::Timer control_loop_timer_;
+    rclcpp::Publisher<geometry_msgs::msg::Twist>::SharedPtr cmd_vel_publisher_;
+    rclcpp::Subscription<turtlesim::msg::Pose>::SharedPtr pose_subscriber_;
+    rclcpp::Subscription<my_robot_msgs::msg::Coordinates2D>::SharedPtr target_subscriber_;
+    rclcpp::TimerBase::SharedPtr control_loop_timer_;
 
-    void callbackTurtlePose(const turtlesim::Pose &msg)
+    void callbackTurtlePose(const turtlesim::msg::Pose::SharedPtr msg)
     {
-        pose_ = msg;
+        pose_ = *msg;
         turtlesim_up_ = true;
     }
 
-    void callbackTarget(const my_robot_msgs::Coordinates2D &msg)
+    void callbackTarget(const my_robot_msgs::msg::Coordinates2D::SharedPtr msg)
     {
-        if (msg.x > 0.0 && msg.x < 11.0 && msg.y > 0.0 && msg.y < 11.0)
+        if (msg->x > 0.0 && msg->x < 11.0 && msg->y > 0.0 && msg->y < 11.0)
         {
-            ROS_INFO("Received new valid target");
-            target_ = msg;
+            RCLCPP_INFO(this->get_logger(), "Received new valid target");
+            target_ = *msg;
             target_up_ = true;
         }
     }
@@ -54,7 +53,7 @@ private:
         double dist_y = target_.y - pose_.y;
         double distance = std::sqrt(dist_x * dist_x + dist_y * dist_y);
 
-        geometry_msgs::Twist msg;
+        geometry_msgs::msg::Twist msg;
 
         if (distance > 0.5)
         {
@@ -81,15 +80,14 @@ private:
             msg.angular.z = 0.0;
         }
 
-        cmd_vel_publisher_.publish(msg);
+        cmd_vel_publisher_->publish(msg);
     }
 };
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "turtle_controller");
-    ros::NodeHandle nh;
-    TurtleController controller = TurtleController(&nh);
-    ros::spin();
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<TurtleController>());
+    rclcpp::shutdown();
     return 0;
 }

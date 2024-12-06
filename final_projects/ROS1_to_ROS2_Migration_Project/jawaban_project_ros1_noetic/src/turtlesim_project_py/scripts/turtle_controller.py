@@ -1,36 +1,37 @@
 #!/usr/bin/env python3
-import rospy
+import rclpy
+from rclpy.node import Node
 import math
 from my_robot_msgs.msg import Coordinates2D
 from geometry_msgs.msg import Twist
 from turtlesim.msg import Pose
 
 
-class TurtleController:
+class TurtleController(Node):
 
     def __init__(self):
+        super().__init__('turtle_controller')
         self.pose_ = None
         self.target_ = None
-        self.cmd_vel_publisher_ = rospy.Publisher(
-            "/turtle1/cmd_vel", Twist, queue_size=10)
-        self.pose_subscriber_ = rospy.Subscriber(
-            "/turtle1/pose", Pose, self.callback_turtle_pose, queue_size=10)
-        self.target_subscriber_ = rospy.Subscriber(
-            "target_coordinates", Coordinates2D, self.callback_target)
-        self.control_loop_timer_ = rospy.Timer(
-            rospy.Duration(0.01), self.control_loop)
-        rospy.loginfo("Turtle controller has been started.")
+        self.cmd_vel_publisher_ = self.create_publisher(
+            Twist, "/turtle1/cmd_vel", 10)
+        self.pose_subscriber_ = self.create_subscription(
+            Pose, "/turtle1/pose", self.callback_turtle_pose, 10)
+        self.target_subscriber_ = self.create_subscription(
+            Coordinates2D, "target_coordinates", self.callback_target, 10)
+        self.control_loop_timer_ = self.create_timer(0.01, self.control_loop)
+        self.get_logger().info("Turtle controller has been started.")
 
     def callback_turtle_pose(self, msg):
         self.pose_ = msg
 
     def callback_target(self, msg):
         if msg.x > 0.0 and msg.x < 11.0 and msg.y > 0.0 and msg.y < 11.0:
-            rospy.loginfo("Received new valid target")
+            self.get_logger().info("Received new valid target")
             self.target_ = msg
 
-    def control_loop(self, event=None):
-        if self.pose_ == None or self.target_ == None:
+    def control_loop(self):
+        if self.pose_ is None or self.target_ is None:
             return
 
         dist_x = self.target_.x - self.pose_.x
@@ -60,8 +61,12 @@ class TurtleController:
 
         self.cmd_vel_publisher_.publish(msg)
 
+def main(args=None):
+    rclpy.init(args=args)
+    node = TurtleController()
+    rclpy.spin(node)
+    node.destroy_node()
+    rclpy.shutdown()
 
 if __name__ == '__main__':
-    rospy.init_node('turtle_controller')
-    controller = TurtleController()
-    rospy.spin()
+    main()

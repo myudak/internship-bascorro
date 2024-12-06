@@ -1,51 +1,51 @@
-#include <ros/ros.h>
-#include <my_robot_msgs/Coordinates2D.h>
-#include <cstdlib>
+#include <rclcpp/rclcpp.hpp>
+#include <my_robot_msgs/msg/coordinates2_d.hpp>
+#include <random>
 
-class TargetPublisher
+class TargetPublisher : public rclcpp::Node
 {
-
 public:
-    TargetPublisher(ros::NodeHandle *nh)
+    TargetPublisher() : Node("target_publisher")
     {
-        double publish_interval;
-        ros::param::param<double>("~publish_interval", publish_interval, 3.0);
-        pub_ = nh->advertise<my_robot_msgs::Coordinates2D>("target_coordinates", 10);
-        timer_ = nh->createTimer(ros::Duration(publish_interval), std::bind(&TargetPublisher::sendRandomCoordinates, this));
-        ROS_INFO("Target publisher has been started");
+        this->declare_parameter<double>("publish_interval", 3.0);
+        double publish_interval = this->get_parameter("publish_interval").as_double();
+
+        pub_ = this->create_publisher<my_robot_msgs::msg::Coordinates2D>("target_coordinates", 10);
+        timer_ = this->create_wall_timer(std::chrono::duration<double>(publish_interval), std::bind(&TargetPublisher::sendRandomCoordinates, this));
+        RCLCPP_INFO(this->get_logger(), "Target publisher has been started");
     }
 
 private:
-    ros::Publisher pub_;
-    ros::Timer timer_;
+    rclcpp::Publisher<my_robot_msgs::msg::Coordinates2D>::SharedPtr pub_;
+    rclcpp::TimerBase::SharedPtr timer_;
+    std::mt19937 rng_{std::random_device{}()};
+    std::uniform_real_distribution<double> dist_{0.0, 11.0};
 
-    // returns random double number in range [0.0, 1.0)
     double randomDouble()
     {
-        return double(std::rand()) / (double(RAND_MAX) + 1.0);
+        return dist_(rng_);
     }
 
     void sendRandomCoordinates()
     {
-        double x = randomDouble() * 11.0;
-        double y = randomDouble() * 11.0;
+        double x = randomDouble();
+        double y = randomDouble();
         publishCoordinates(x, y);
     }
 
     void publishCoordinates(double x, double y)
     {
-        my_robot_msgs::Coordinates2D msg;
+        auto msg = my_robot_msgs::msg::Coordinates2D();
         msg.x = x;
         msg.y = y;
-        pub_.publish(msg);
+        pub_->publish(msg);
     }
 };
 
 int main(int argc, char **argv)
 {
-    ros::init(argc, argv, "target_publisher");
-    ros::NodeHandle nh;
-    TargetPublisher target_publisher = TargetPublisher(&nh);
-    ros::spin();
+    rclcpp::init(argc, argv);
+    rclcpp::spin(std::make_shared<TargetPublisher>());
+    rclcpp::shutdown();
     return 0;
 }
