@@ -26,3 +26,4 @@ sistem Nav2 dan ROS. Keduanya membantu robot dalam mengidentifikasi objek
 dan menentukan tindakan di lapangan.
 
 ![alt text](image-3.png)
+![alt text](image-4.png)

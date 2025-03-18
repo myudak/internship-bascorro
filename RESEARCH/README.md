@@ -34,10 +34,24 @@ In RoboCup Humanoid Soccer, the **vision system** is crucial for enabling robots
 
 By effectively combining these components, the vision system enables humanoid robots to perceive their environment, make informed decisions, and execute actions autonomously during soccer matches.
 
+### PAPER ~~~
+
 https://2019.robocup.org/downloads/program/TeimouriEtAl2019.pdf
 
 https://humanoid.robocup.org/wp-content/uploads/2024-kura-system-description.pdf
 
 https://arxiv.org/pdf/1909.02406
 
+https://2019.robocup.org/downloads/program/FiedlerEtAl2019.pdf
+
+https://robocup.informatik.uni-hamburg.de/wp-content/uploads/2019/10/thesis-min.pdf
+
+https://www.cs.utexas.edu/~pstone/Papers/bib2html-links/RoboCup2022-nskiran.pdf
+
+#### ROBOCUP LAMA 2012
+
+https://cgi.cse.unsw.edu.au/~robocup/2012site/reports/Youssefreport.pdf
+
 ---
+
+https://github.com/henki-robotics/robotics_essentials_ros2
